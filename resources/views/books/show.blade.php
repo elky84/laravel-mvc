@@ -5,7 +5,7 @@
     <p style="text-align: right" class="pt-2">{{$book->created_at}}</p>
 
     <div class="content mt-4 rounded-3 border border-secondary">
-        Url:
+        <label for="url" class="form-label">Url</label>
         <div class="p-3">
             {{$book->url}}
         </div>

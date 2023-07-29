@@ -31,12 +31,31 @@ class BookController extends Controller
 
     public function index(){
         $books = $this->book->latest()->paginate(10);
-        return view('books.index', compact('book')); //
+        return view('books.index', compact('books'));
     }
 
     // 상세 페이지
     public function show(book $book){
 	// show 에 경우는 해당 페이지의 모델 값이 파라미터로 넘어옵니다.
         return view('books.show', compact('book'));
+    }
+
+    public function edit(book $book){
+        return view('books.edit', compact('book'));
+    }
+
+    public function update(Request $request, book $book){
+        $request = $request->validate([
+            'name' => 'required',
+            'url' => 'required'
+        ]);
+        // $book 수정할 모델 값이므로 바로 업데이트 해줍시다.
+        $book->update($request);
+        return redirect()->route('books.index', $book);
+    }
+
+    public function destroy(book $book){
+        $book->delete();
+        return redirect()->route('books.index');
     }
 }

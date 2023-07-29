@@ -3,7 +3,7 @@
 
 {{-- 아래 html 을 @yield('content') 에 보낸다고 생각하시면 됩니다. --}}
 @section('content')
-    <h2 class="mt-4 mb-3">Product List</h2>
+    <h2 class="mt-4 mb-3">Book List</h2>
 
     <a href="{{route("books.create")}}">
         <button type="button" class="btn btn-dark" style="float: right;">Create</button>
@@ -35,7 +35,16 @@
                     <a href="{{route("books.show", $book->id)}}">{{$book->name}}</a>
                 </td>                
                 <td>{{$book->created_at}}</td>
-                <td>Edit/Delete</td>
+                <td>
+                    <input type="button" value="Edit" onclick="location.href='{{route("books.edit", $book)}}'"/>
+
+                    <form action="{{route('books.destroy', $book->id)}}" method="post" style="display:inline-block;">
+                        {{-- delete method와 csrf 처리필요 --}}
+                        @method('delete')
+                        @csrf
+                        <input onclick="return confirm('정말로 삭제하겠습니까?')" type="submit" value="delete"/>
+                    </form>
+                </td>
             </tr>
         @endforeach
         </tbody>
