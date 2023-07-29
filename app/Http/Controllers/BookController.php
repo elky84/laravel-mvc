@@ -31,6 +31,12 @@ class BookController extends Controller
 
     public function index(){
         $books = $this->book->latest()->paginate(10);
-        return view('books.index', compact('books')); //
+        return view('books.index', compact('book')); //
+    }
+
+    // 상세 페이지
+    public function show(book $book){
+	// show 에 경우는 해당 페이지의 모델 값이 파라미터로 넘어옵니다.
+        return view('books.show', compact('book'));
     }
 }

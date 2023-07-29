@@ -24,3 +24,5 @@ Route::get('/books/create', [BookController::class, 'create'])->name('books.crea
 
 // store 요청은 form 을 통해 post 로 옵니다.
 Route::post('/books/store', [BookController::class, 'store'])->name('books.store');
+
+Route::get('books/{book}', [BookController::class, 'show'])->name("books.show");

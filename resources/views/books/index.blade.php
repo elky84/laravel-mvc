@@ -27,12 +27,14 @@
         </thead>
         <tbody>
         {{-- blade 에서는 아래 방식으로 반복문을 처리합니다. --}}
-        {{-- Product Controller의 index에서 넘긴 $books(product 데이터 리스트)를 출력해줍니다. --}}
-        @foreach ($books as $key => $product)
+        {{-- Book Controller의 index에서 넘긴 $books(book 데이터 리스트)를 출력해줍니다. --}}
+        @foreach ($books as $key => $book)
             <tr>
                 <th scope="row">{{$key+1 + (($books->currentPage()-1) * 10)}}</th>
-                <td>{{$product->name}}</td>
-                <td>{{$product->created_at}}</td>
+                <td>
+                    <a href="{{route("books.show", $book->id)}}">{{$book->name}}</a>
+                </td>                
+                <td>{{$book->created_at}}</td>
                 <td>Edit/Delete</td>
             </tr>
         @endforeach
